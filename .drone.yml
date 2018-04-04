@@ -9,3 +9,13 @@ pipeline:
     image: node:alpine
     commands:
       - yarn test
+  notify:
+    image: plugins/slack
+    webhook: https://hooks.slack.com/services/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
+    channel: drone
+    username: nadine_morano
+    image_url: https://unsplash.it/256/256/?random
+  build:
+    image: node:alpine
+    commands:
+      - yarn build
