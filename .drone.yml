@@ -18,7 +18,6 @@ pipeline:
       event: tag
   release:
     image: plugins/github-release
-    api_key: <github_api_key>
     files:
       - build.tar.gz
     checksum:
@@ -30,7 +29,7 @@ pipeline:
       - crc32
     when:
       event: tag
-    secrets: [ github_api_key ]
+    secrets: [ github_token ]
   notify:
     image: plugins/slack
     webhook: <slack_webhook>
