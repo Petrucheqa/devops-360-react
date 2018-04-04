@@ -1,7 +1,11 @@
 ---
 
 pipeline:
-  echo:
+  dependencies:
     image: node:alpine
     commands:
-      - echo 'Run CI / CD Pipeline on Drone'
+      - yarn
+  tests:
+    image: node:alpine
+    commands:
+      - yarn test
