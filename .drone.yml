@@ -21,7 +21,7 @@ pipeline:
     api_key: <github_api_key>
     files:
       - build.tar.gz
-   checksum:
+    checksum:
       - md5
       - sha1
       - sha256
