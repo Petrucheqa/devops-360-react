@@ -11,10 +11,16 @@ pipeline:
       - yarn test
   notify:
     image: plugins/slack
-    webhook: https://hooks.slack.com/services/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
+    webhook: ${slack_webhook}
     channel: drone
     username: nadine_morano
     image_url: https://unsplash.it/256/256/?random
+    template: >
+      {{#success build.status}}
+        La belle build {{build.number}} a fonctionné. GG.
+      {{else}}
+        La build {{build.number}} a raté. Nul. Fix-moi ça.
+      {{/success}}
   build:
     image: node:alpine
     commands:
