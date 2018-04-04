@@ -9,6 +9,28 @@ pipeline:
     image: node:alpine
     commands:
       - yarn test
+  build:
+    image: node:alpine
+    commands:
+      - yarn build
+      - tar -zcvf build.tar.gz -C build .
+    when:
+      event: tag
+  release:
+    image: plugins/github-release
+    api_key: <github_api_key>
+    files:
+      - build.tar.gz
+   checksum:
+      - md5
+      - sha1
+      - sha256
+      - sha512
+      - adler32
+      - crc32
+    when:
+      event: tag
+    secrets: [ github_api_key ]
   notify:
     image: plugins/slack
     webhook: <slack_webhook>
@@ -22,7 +44,3 @@ pipeline:
       {{else}}
         La build {{build.number}} a raté. Nul. Fix-moi ça.
       {{/success}}
-  build:
-    image: node:alpine
-    commands:
-      - yarn build
