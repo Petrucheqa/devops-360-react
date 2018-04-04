@@ -11,8 +11,9 @@ pipeline:
       - yarn test
   notify:
     image: plugins/slack
-    webhook: ${slack_webhook}
+    webhook: <slack_webhook>
     channel: drone
+    secrets: [ slack_webhook ]
     username: nadine_morano
     image_url: https://unsplash.it/256/256/?random
     template: >
